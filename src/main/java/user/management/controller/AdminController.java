@@ -1,6 +1,5 @@
 package user.management.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +36,12 @@ public class AdminController{
 		
 		return "admin-edit";
 	}
-	
-	@RequestMapping(method=RequestMethod.POST, value="/admin/filter") 
+
+	@RequestMapping(method=RequestMethod.POST, value="/admin/filter")
 	public String sortUserList(Model model, @RequestParam("filter") String filter ) {
 		List<AdminDto> users = adminService.getAllUsers(filter);
 		model.addAttribute("users", users);
-		
+
 		return "admin";
 	}
 	

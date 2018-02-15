@@ -25,16 +25,16 @@ public class AdminService {
 		return users.map(AdminDto::new).getContent();
 	}
 
+	public List<AdminDto> getAllUsers(String filter) {
+		Page<User> users = adminRepository.findAll(new PageRequest(0, 10, Direction.ASC, filter));
+
+		return users.map(AdminDto::new).getContent();
+	}
+
 	public AdminDto getUserById(long id) {
 		User user = adminRepository.findOne(id);
 		
 		return new AdminDto(user);
-	}
-	
-	public List<AdminDto> getAllUsers(String filter) {
-		Page<User> users = adminRepository.findAll(new PageRequest(0, 10, Direction.ASC, filter));
-		
-		return users.map(AdminDto::new).getContent();
 	}
 	
 	public List<UserDto> searchUser(String search) {
@@ -42,5 +42,4 @@ public class AdminService {
 		
 		return users.map(UserDto::new).getContent();
 	}
-	
 }

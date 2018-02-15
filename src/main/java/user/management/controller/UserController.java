@@ -25,22 +25,19 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
+    @RequestMapping(value = {"/", "/home", "/index"}, method = RequestMethod.GET)
+    public String welcome() {
         return "home";
     }
 	
 	@RequestMapping(method=RequestMethod.POST, value="/registration")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void registerUser (HttpServletResponse response, @Valid UserDto userDto, BindingResult bindingResult, Model model) throws IOException {
-		
 		if (bindingResult.hasErrors()) {
 			response.sendRedirect("/register");
 		}
 		UserDto user = userService.registerUser(userDto);
-		
 		model.addAttribute("user", user);
-		
 		response.sendRedirect("users");
 	}
 	
@@ -55,28 +52,28 @@ public class UserController {
 	@RequestMapping(method=RequestMethod.GET, value="/edit/{id}")
 	public String editUser(Model model, @PathVariable long id) {
 		UserDto user = userService.getUserById(id);
-		
 		model.addAttribute("user", user);
 		
 		return "edit";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/users/{userId}")
-	public String updateUser(Model model, @PathVariable long userId, @Valid UserDto userDto) {
+	public String updateUser(@PathVariable long userId, @Valid UserDto userDto) {
 		userService.updateUser(userId, userDto);
+
 		return "redirect:/users";
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/users/{userId}")
-	public String deleteUser(Model model, @PathVariable long userId) {
+	public String deleteUser(@PathVariable long userId) {
 		userService.deleteUser(userId);
+
 		return "redirect:/users";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/filter") 
-	public String sortUserList(Model model, @RequestParam("filter") String filter ) throws IOException {
+	public String sortUserList(Model model, @RequestParam("filter") String filter ) {
 		List<UserDto> users = userService.getAllUsers(filter);
-		
 		model.addAttribute("users", users);
 		
 		return "users";
@@ -85,8 +82,8 @@ public class UserController {
 	@RequestMapping(method=RequestMethod.POST, value="/search")
 	public String searchUsers(Model model, @RequestParam("search") String search) {
 		List<UserDto> users = userService.searchUser(search);
-		
 		model.addAttribute("users", users);
+
 		return "users";
 	}
 }
