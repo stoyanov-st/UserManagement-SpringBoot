@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Users</title>
+        <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}" href="css/bootstrap.min.css" />
+        <script type="text/javascript" src="js/main.js"></script>
+    </head>
+    <body>
+    
+    <div class="container">
+	<h1>User Management</h1>
+	<br/>
+	<div class="container">
+		<div class="row">
+			<form th:action="@{/logout}" method="post">
+				<a th:href="@{/register}" class="btn btn-primary" >Create User</a>
+			
+		    	<input type="submit" class="btn btn-primary" value="Sign Out"/>
+		    </form>
+	    </div>
+    </div>
+	<br/> <br/>
+	
+	<form method="post" th:action="@{/search}" class="from-group form-inline" >
+		<input type="text" name="search"  class="form-control"/>
+		<button type="submit"  class="btn btn-info">Search</button>
+	</form>
+
+	 <br/>
+	<br/>
+	
+	<form id="radioForm" method="post" th:action="@{/filter}" class="row container form-inline">
+		<div class="input-group">
+			<label class="radio-inline form-control">
+				<input type="radio" class="input-group-addon" value="lastName" name="filter" onChange="radioSubmit();"/>
+				Last Name</label>
+		</div>
+		<div class="input-group">
+			<label class="radio-inline form-control">
+				<input type="radio" class="input-group-addon" value="dateOfBirth" name="filter" onChange="radioSubmit();"/>
+			    Date of birth</label>
+		</div>
+	</form>
+	
+	<table class="table table-bordered">
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Date of birth</th>
+			<th>PhoneNumber</th>
+			<th>Email</th>
+			<th colspan="2">Options</th>
+		</tr>
+			<tr th:each="user : ${users}">
+				<td><p th:text="${user.firstName}" /></td>
+				<td><p th:text="${user.lastName}" /></td>
+				<td><p th:text="${user.dateOfBirth}" /></td>
+				<td><p th:text="${user.phoneNumber}" /></td>
+				<td><p th:text="${user.email}" /></td>
+				<td><a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit</a></td>
+				<td><a th:href="@{/users/{id}(id=${user.id})}" class="btn btn-primary">Delete</a></td>
+			</tr>
+	</table>
+    </div>
+    </body>
+  </html>
+  

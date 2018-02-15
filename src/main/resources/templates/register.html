@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Register</title>
+         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+         <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    </head>
+ 	<body>
+    	<div class="container jumbotron vertical-align">
+	    	<div class="container">
+				<h1 class="text-center">Create User</h1>
+				<br/>
+				<form th:action="@{/registration}" method="post" class="col-md-4 col-md-offset-4">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					<div class="container row form-group" >
+						<input type="text" class="form-control" name="username" placeholder="User Name" required="required"/>
+					</div>
+					<div class="container row form-group" >
+						<input type="password" class="form-control" name="password" placeholder="Password" required="required"/>
+					</div>
+			   	   	<div class="container row form-group" >
+						<input type="text" class="form-control" name="firstName" placeholder="FirstName" required="required"/>
+					</div>
+					<div class="container row form-group" >
+						<input type="text" class="form-control" name="lastName" placeholder="LastName" required="required"/>
+					</div>
+					<div class="container row form-group" >			
+						<input type="date" class="form-control" name="dateOfBirth" placeholder="Date of birth" required="required"/>
+					</div>
+					<div class="container row form-group" >
+						<input type="tel" class="form-control" name="phoneNumber" placeholder="Phone number" required="required"/>
+					</div>
+					<div class="container row form-group" >
+						<input type="email" class="form-control" name="email" placeholder="Email" required="required"/>
+					</div>
+					<div class="container row form-inline" >			
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
