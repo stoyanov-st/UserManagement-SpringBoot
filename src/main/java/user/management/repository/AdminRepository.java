@@ -8,6 +8,6 @@ import user.management.model.User;
 
 public interface AdminRepository extends PagingAndSortingRepository<User, Long> {
 	
-	public Page<User> findAll(Pageable pageRequest);
-	public Page<User> findByFirstNameContainingOrLastNameContainingOrEmailContainingAllIgnoreCase(Pageable pageRequest, String firstName, String lastName, String email);
+	Page<User> findAll(Pageable pageRequest);
+	Page<User> findByFirstNameContainingOrLastNameContainingOrEmailContainingAllIgnoreCase(Pageable pageRequest, String firstName, String lastName, String email);
 }

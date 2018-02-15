@@ -52,11 +52,11 @@
 			<th colspan="2">Options</th>
 		</tr>
 			<tr th:each="user : ${users}">
-				<td><p th:text="${user.firstName}" /></td>
-				<td><p th:text="${user.lastName}" /></td>
-				<td><p th:text="${user.dateOfBirth}" /></td>
-				<td><p th:text="${user.phoneNumber}" /></td>
-				<td><p th:text="${user.email}" /></td>
+				<td><p th:text="${user.firstName}" ></p></td>
+				<td><p th:text="${user.lastName}" ></p></td>
+				<td><p th:text="${user.dateOfBirth}" ></p></td>
+				<td><p th:text="${user.phoneNumber}" ></p></td>
+				<td><p th:text="${user.email}" ></p></td>
 				<td><a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit</a></td>
 				<td><a th:href="@{/users/{id}(id=${user.id})}" class="btn btn-primary">Delete</a></td>
 			</tr>

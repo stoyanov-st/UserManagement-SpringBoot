@@ -1,6 +1,5 @@
 package user.management.model;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.sql.Date;
 import java.util.List;
@@ -13,16 +12,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import user.management.dto.UserDto;
-import user.management.model.Role;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import user.management.repository.RoleRepository;
 
 @Entity
+@Data
 public class User implements UserDetails{
 
 	/**
@@ -79,42 +76,6 @@ public class User implements UserDetails{
         );
         this.setRoles(roles);
     }
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	@Override
 	public String getUsername() {

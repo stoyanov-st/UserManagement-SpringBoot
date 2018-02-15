@@ -61,7 +61,5 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			role = new Role(roleName);
 			roleRepository.save(role);
 		}
-		
 	}
-
 }
