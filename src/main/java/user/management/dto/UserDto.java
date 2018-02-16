@@ -44,7 +44,9 @@ public class UserDto {
 	@NotNull
 	@Size(min = 10, max = 10)
 	private String phoneNumber;
-	
+
+	public UserDto() {}
+
 	public UserDto(User user) {
 		this.id = user.getId();
 		this.username = user.getUsername();

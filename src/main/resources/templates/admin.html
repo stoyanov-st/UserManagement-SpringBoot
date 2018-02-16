@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
+        <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+        <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
         <title>Users</title>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </head>
     <body>
@@ -55,7 +58,7 @@
 		</tr>
 			<tr th:each="user : ${users}">
 				<td><p th:text="${user.firstName}" /></td>
-				<td><p th:text="${user.lastName}" /></td>
+				<td><p th:text="${user.lastName}" ></p></td>
 				<td><p th:text="${user.dateOfBirth}" /></td>
 				<td><p th:text="${user.phoneNumber}" /></td>
 				<td><p th:text="${user.email}" /></td>

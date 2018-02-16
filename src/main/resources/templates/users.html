@@ -3,7 +3,8 @@
     <head>
         <title>Users</title>
         <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}" href="css/bootstrap.min.css" />
-        <script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
     </head>
     <body>
     
@@ -32,12 +33,12 @@
 	<form id="radioForm" method="post" th:action="@{/filter}" class="row container form-inline">
 		<div class="input-group">
 			<label class="radio-inline form-control">
-				<input type="radio" class="input-group-addon" value="lastName" name="filter" onChange="radioSubmit();"/>
+				<input type="radio" class="input-group-addon" value="lastName" name="filter"/>
 				Last Name</label>
 		</div>
 		<div class="input-group">
 			<label class="radio-inline form-control">
-				<input type="radio" class="input-group-addon" value="dateOfBirth" name="filter" onChange="radioSubmit();"/>
+				<input type="radio" class="input-group-addon" value="dateOfBirth" name="filter"/>
 			    Date of birth</label>
 		</div>
 	</form>

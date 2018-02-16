@@ -34,11 +34,14 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public void registerUser (HttpServletResponse response, @Valid UserDto userDto, BindingResult bindingResult, Model model) throws IOException {
 		if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
 			response.sendRedirect("/register");
 		}
-		UserDto user = userService.registerUser(userDto);
-		model.addAttribute("user", user);
-		response.sendRedirect("users");
+		else {
+			UserDto user = userService.registerUser(userDto);
+			model.addAttribute("user", user);
+			response.sendRedirect("/users");
+		}
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/users")

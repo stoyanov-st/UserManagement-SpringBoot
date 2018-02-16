@@ -5,17 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import user.management.dto.AdminDto;
 import user.management.dto.UserDto;
 import user.management.service.AdminService;
 
 @Controller
-public class AdminController{
+public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
@@ -38,7 +35,7 @@ public class AdminController{
 	}
 
 	@RequestMapping(method=RequestMethod.POST, value="/admin/filter")
-	public String sortUserList(Model model, @RequestParam("filter") String filter ) {
+	public String sortUserList(Model model, @RequestBody String filter ) {
 		List<AdminDto> users = adminService.getAllUsers(filter);
 		model.addAttribute("users", users);
 
