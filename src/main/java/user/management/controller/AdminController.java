@@ -1,14 +1,10 @@
 package user.management.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import user.management.dto.AdminDto;
-import user.management.dto.UserDto;
+import org.springframework.web.servlet.ModelAndView;
 import user.management.service.AdminService;
 
 @Controller
@@ -19,34 +15,32 @@ public class AdminController {
 
 
 	@RequestMapping(method=RequestMethod.GET, value="/admin")
-	public String getAllUsers(Model model) {
-		List<AdminDto> users = adminService.getAllUsers();
-		model.addAttribute("users", users);
-		
-		return "admin";
-	}
-	
+	public ModelAndView getAllUsers() {
+        return new ModelAndView().addObject("users", adminService.getAllUsers());
+    }
+
 	@RequestMapping(method=RequestMethod.GET, value="/admin/{id}")
-	public String editUser(Model model, @PathVariable long id) {
-		UserDto user = adminService.getUserById(id);
-		model.addAttribute("user", user);
-		
-		return "admin-edit";
+	public ModelAndView editUser(@PathVariable long id) {
+	    ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.setViewName("admin-edit");
+	    modelAndView.addObject("user", adminService.getUserById(id));
+        return  modelAndView;
 	}
 
 	@RequestMapping(method=RequestMethod.POST, value="/admin/filter")
-	public String sortUserList(Model model, @RequestBody String filter ) {
-		List<AdminDto> users = adminService.getAllUsers(filter);
-		model.addAttribute("users", users);
-
-		return "admin";
+	public ModelAndView sortUserList(@RequestBody String filter ) {
+	    ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.setViewName("admin");
+	    modelAndView.addObject("users", adminService.getAllUsers(filter));
+	    modelAndView.addObject("filter", filter);
+		return modelAndView;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/admin/search")
-	public String searchUsers(Model model, @RequestParam("search") String search) {
-		List<UserDto> users = adminService.searchUser(search);
-		model.addAttribute("users", users);
-
-		return "admin";
+	public ModelAndView searchUsers(@RequestParam("search") String search) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin");
+		modelAndView.addObject("users", adminService.searchUser(search));
+		return modelAndView;
 	}
 }

@@ -49,7 +49,17 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 		user.setRoles(Arrays.asList(admin));
 		user.setEnabled(true);
 		userRepository.save(user);
-		
+
+		final User userAcc = new User();
+		userAcc.setFirstName("Test");
+		userAcc.setLastName("User");
+		userAcc.setUsername("user");
+		userAcc.setPassword(passwordEncoder.encode("pass"));
+		userAcc.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+		userAcc.setEnabled(true);
+        userRepository.save(userAcc);
+
+
 		alreadySetup = true;
 		logger.info("DB setup");
 	}

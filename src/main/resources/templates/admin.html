@@ -35,12 +35,12 @@
 	<form id="radioForm" method="post" th:action="@{/admin/filter}" class="row container form-inline">
 		<div class="input-group">
 			<label class="radio-inline form-control">
-				<input type="radio" class="input-group-addon" value="lastName" name="filter" onChange="radioSubmit();"/>
+				<input type="radio" class="input-group-addon" value="lastName" th:checked="${filter} == 'lastName' ? 'true' : 'false' " name="filter" onChange="radioSubmit();"/>
 				Last Name</label>
 		</div>
 		<div class="input-group">
 			<label class="radio-inline form-control">
-				<input type="radio" class="input-group-addon" value="dateOfBirth" name="filter" onChange="radioSubmit();"/>
+				<input type="radio" class="input-group-addon" value="dateOfBirth" th:checked="${filter} == 'dateOfBirth' ? 'true' : 'false' " name="filter" onChange="radioSubmit();"/>
 			    Date of birth</label>
 		</div>
 	</form>

@@ -17,10 +17,4 @@ function radioSubmit() {
             console.log(error);
         }
     });
-	//document.getElementById("radioForm").submit();
 }
-
-/*$("radioForm").submit(function (data) {
-    this.preventDefault();
-
-});*/
