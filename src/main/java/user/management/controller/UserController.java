@@ -1,5 +1,6 @@
 package user.management.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import user.management.dto.UserDto;
 import user.management.service.UserService;
 
@@ -21,19 +23,19 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(method=RequestMethod.GET, value="/users")
-	public String getAllUsers(Model model) {
-		List<UserDto> users = userService.getAllUsers();
-		model.addAttribute("users", users);
-		
-	 	return "users";
+	public ModelAndView getAllUsers() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("users");
+		modelAndView.addObject("users", userService.getAllUsers());
+	 	return modelAndView;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/edit/{id}")
-	public String editUser(Model model, @PathVariable long id) {
-		UserDto user = userService.getUserById(id);
-		model.addAttribute("user", user);
-		
-		return "edit";
+	public ModelAndView editUser(@PathVariable long id) {
+		ModelAndView modelAndView = new  ModelAndView();
+		modelAndView.setViewName("edit");
+		modelAndView.addObject("user", userService.getUserById(id));
+		return modelAndView;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/users/{userId}")
@@ -51,18 +53,18 @@ public class UserController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/filter") 
-	public String sortUserList(Model model, @RequestParam("filter") String filter ) {
-		List<UserDto> users = userService.getAllUsers(filter);
-		model.addAttribute("users", users);
-		
-		return "users";
+	public ModelAndView sortUserList(@RequestParam("filter") String filter ) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("users");
+		modelAndView.addObject("users", userService.getAllUsers(filter));
+		return modelAndView;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/search")
-	public String searchUsers(Model model, @RequestParam("search") String search) {
-		List<UserDto> users = userService.searchUser(search);
-		model.addAttribute("users", users);
-
-		return "users";
+	public ModelAndView searchUsers(@RequestParam("search") String search) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("users");
+		modelAndView.addObject("users", userService.searchUser(search));
+		return modelAndView;
 	}
 }
